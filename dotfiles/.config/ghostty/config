@@ -1,0 +1,3 @@
+# macos-titlebar-style = hidden
+# keybind = command+k=text:\x0B
+scrollback-limit = 100000000
