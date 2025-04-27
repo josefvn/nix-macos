@@ -1,0 +1,15 @@
+version: '3'
+
+tasks:
+  default:
+    desc: Welcome! 
+    cmds:
+      - echo "Hello 👋"
+
+  build:
+    desc: Build using home-manager switch with dynamic macOS username
+    vars:
+      USERNAME:
+        sh: whoami
+    cmds:
+      - home-manager switch --flake .#{{.USERNAME}}

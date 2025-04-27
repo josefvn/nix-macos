@@ -19,6 +19,7 @@
   # environment.
   home.packages = [
     pkgs.bat
+    pkgs.go-task
     pkgs.jq
     pkgs.tree
     pkgs.htop
