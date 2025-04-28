@@ -2,11 +2,10 @@ version: '3'
 
 tasks:
   default:
-    desc: Welcome! 
     cmds:
-      - echo "Hello 👋"
+      - task --list
 
-  build:
+  switch:
     desc: Build using home-manager switch with dynamic macOS username
     vars:
       USERNAME:

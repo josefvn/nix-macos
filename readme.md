@@ -1,18 +1,17 @@
 # Nix macOS configuration
 
-Install Nix with:
-```
-sh <(curl -L https://nixos.org/nix/install)
+## Installation
+
+Simply run the following from your terminal to install:
+
+```zsh
+curl -s https://raw.githubusercontent.com/josefvn/nix-macos/refs/heads/main/install | zsh
 ```
 
-Initialise Home Manager with:
-```
-nix run home-manager -- init --switch
-```
+## Installation
 
-Copy the files to `~/Projects/nix-macos`.
+To completely uninstall the configuration including Nix, execute the following:
 
-Activate configuration with:
+```zsh
+zsh < uninstall
 ```
-home-manager switch --flake .#josef.vanniekerk
-

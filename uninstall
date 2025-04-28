@@ -1,0 +1,51 @@
+#!/bin/zsh
+
+# See https://nix.dev/manual/nix/2.24/installation/uninstall#macos
+
+if sudo -v; then
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+else
+    echo "This script requires sudo privileges. Exiting."
+    exit 1
+fi
+
+echo "Restoring Zsh and Bash configurations"
+
+  sudo mv /etc/zshrc.backup-before-nix /etc/zshrc
+  sudo mv /etc/bashrc.backup-before-nix /etc/bashrc
+  sudo mv /etc/bash.bashrc.backup-before-nix /etc/bash.bashrc
+
+echo "Stopping and removing Nix daemon services"
+
+  sudo launchctl unload /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+  sudo rm /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+  sudo launchctl unload /Library/LaunchDaemons/org.nixos.darwin-store.plist
+  sudo rm /Library/LaunchDaemons/org.nixos.darwin-store.plist
+
+echo "Removing `nixbld` group and `_nixbuildN` users"
+
+  sudo dscl . -delete /Groups/nixbld
+  for u in $(sudo dscl . -list /Users | grep _nixbld)
+    do sudo dscl . -delete /Users/$u
+  done
+
+echo "Backing up /etc/fstab"
+
+  sudo cp /etc/fstab /etc/fstab.backup.$(date +%Y%m%d%H%M%S)
+
+echo "Removing /nix mount point"
+
+  sudo sed -i.bak '/\/nix/d' /etc/fstab
+
+echo "Removing nix entry from /etc/synthetic.conf"
+
+  if [ -f /etc/synthetic.conf ]; then
+    if [ "$(cat /etc/synthetic.conf)" = "nix" ]; then
+      sudo rm /etc/synthetic.conf
+    else
+      # If the file contains other lines, remove just the 'nix' line
+      sudo sed -i.bak '/^nix$/d' /etc/synthetic.conf
+    fi
+  fi
+
+echo "Done..."
