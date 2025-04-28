@@ -21,6 +21,8 @@
     pkgs.bat
     pkgs.go-task
     pkgs.jq
+    pkgs.lazydocker
+    pkgs.lazygit
     pkgs.tree
     pkgs.htop
 
