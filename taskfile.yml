@@ -11,4 +11,4 @@ tasks:
       USERNAME:
         sh: whoami
     cmds:
-      - home-manager switch --flake .#{{.USERNAME}}
+      - home-manager switch --flake .#my-nix
