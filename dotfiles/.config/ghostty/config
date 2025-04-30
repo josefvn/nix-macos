@@ -1,7 +1,0 @@
-# Set to 10MB of scrollback
-#
-scrollback-limit = 10485760
-
-# Set the terminal theme
-#
-theme = catppuccin-mocha
