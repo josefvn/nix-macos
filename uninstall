@@ -48,4 +48,9 @@ echo "Removing nix entry from /etc/synthetic.conf"
     fi
   fi
 
+echo "Removing Home Manager application links and trampolines"
+
+  rm -f ~/Applications/Home\ Manager\ Apps
+  rm -rf ~/Applications/Home\ Manager\ Trampolines
+
 echo "Done..."
